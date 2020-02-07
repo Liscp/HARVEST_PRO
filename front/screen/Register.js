@@ -31,6 +31,16 @@ export default class Registro extends Component {
                 
             />
             <InputField 
+              labelText="Número Telefónico" 
+              labelTextSize={14} 
+              labelColor={colors.white} 
+              textColor={colors.white} 
+              borderBottomColor={colors.white} 
+              inputType="number" 
+              customStyle={{marginBottom:30}} 
+                
+            />
+            <InputField 
               labelText="Correo Institucional" 
               labelTextSize={14} 
               labelColor={colors.white} 

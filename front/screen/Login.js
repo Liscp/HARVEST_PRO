@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { View, Text, ScrollView, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
-import InputField from "../components/form/InputFiled";
+import InputField from "../components/InputFiled";
 import colors from "../src/style/index";
 export default class Login extends Component {
   render() {
@@ -9,27 +9,6 @@ export default class Login extends Component {
       <ImageBackground style={styles.wrapper} source={require('../img/fondo.jpg')} behavior="padding">
         <View style={styles.scrollViewWrapper, styles.avoidView}>
           <ScrollView style={styles.scrollView}>
-            <Text style={styles.loginHeader}>Registrate</Text>
-            <InputField 
-              labelText="Nombres" 
-              labelTextSize={14} 
-              labelColor={colors.white} 
-              textColor={colors.white} 
-              borderBottomColor={colors.white} 
-              inputType="text" 
-              customStyle={{marginBottom:30}} 
-                
-            />
-            <InputField 
-              labelText="Apellido" 
-              labelTextSize={14} 
-              labelColor={colors.white} 
-              textColor={colors.white} 
-              borderBottomColor={colors.white} 
-              inputType="text" 
-              customStyle={{marginBottom:30}} 
-                
-            />
             <InputField 
               labelText="Correo Institucional" 
               labelTextSize={14} 
@@ -51,7 +30,7 @@ export default class Login extends Component {
           </ScrollView>
           <View style={styles.buttonWrapper}>
             <TouchableHighlight onPress={(this.onLogin.bind(this))} style={[{ opacity: 0.6 }, styles.button]}>
-              <Text >Registrate</Text>
+              <Text >Iniciar Sesion</Text>
             </TouchableHighlight>
           </View>
         </View>
