@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Animated, Easing } from "react-native";
 import colors from "../../src/style/index";
+import Icon from "react-native-vector-icons/FontAwesome";
 class InputField extends Component {
   toggleShowPassword() {
     this.setState({ secureInput: !this.state.secureInput });
@@ -26,16 +27,6 @@ class InputField extends Component {
       
       <View style={[customStyle, styles.wrapper]}>
         <Text style={[{ color, fontSize }, styles.label]}>{labelText}</Text>
-        {inputType === "password" ? (
-          <TouchableOpacity
-            style={styles.showButton}
-            onPress={this.toggleShowPassword}
-          >
-            <Text style={styles.showButtonText}>
-              {secureInput ? "Show" : "Hide"}
-            </Text>
-          </TouchableOpacity>
-        ) : null}
         <TextInput
           autoCorrect={false}
           style={[

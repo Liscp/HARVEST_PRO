@@ -1,12 +1,30 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
-import { View, Text, ScrollView, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
-import InputField from "../components/InputFiled";
-import colors from "../src/style/index";
+import { View, ScrollView, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
+import InputField from "../../components/form/InputFiled";
+import colors from "../../src/style/index";
+import { Container, Header, Title, Content, Button, Icon, Left, Right, Body, Text } from "native-base";
 export default class Login extends Component {
   render() {
     return (
-      <ImageBackground style={styles.wrapper} source={require('../img/fondo.jpg')} behavior="padding">
+      <Container>
+        <ImageBackground style={styles.wrapper} source={require('../../img/fondo2.jpg')} behavior="padding">
+        <Header transparent>
+          <Left>
+            <Button transparent onPress={this.onInicio.bind(this)}>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Transparent</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={this.onInicio.bind(this)}>
+              <Text>Cancel</Text>
+            </Button>
+          </Right>
+        </Header>
+      
         <View style={styles.scrollViewWrapper, styles.avoidView}>
           <ScrollView style={styles.scrollView}>
             <InputField 
@@ -35,10 +53,16 @@ export default class Login extends Component {
           </View>
         </View>
        </ImageBackground>
+       </Container>
     );
   }
   onLogin(){
     console.log('Aplaste el login')
+    return this.props.navigation.push('Home')
+  }
+  onInicio(){
+    console.log('Aplaste atras')
+    return this.props.navigation.push('Inicio')
   }
 }
 
