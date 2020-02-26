@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { View, ScrollView, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
-import InputField from "../../components/form/InputFiled";
-import { Container, Header, Item, Input, Icon, Button, Text, Content, Form, Label } from 'native-base';   
+import { Item, Input, Text, Form, Label } from 'native-base';   
 import colors from "../../src/style/index";
-import enviarData from '../../envios/getPostRegistro';
+ 
 export default class Registro extends Component {
   constructor(props){
     super(props);

@@ -3,7 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import Inicio from '../screen/Inicio/Inicio';
 import Login from '../screen/Login/Login';
 import Registro from '../screen/Registro/Register';
-import Publicar from '../screen/Publicar/Publicar';
+import Publicacion from '../screen/Publicar/Publicar';
 import Home from '../screen/Home/Home';
 
 
@@ -32,8 +32,8 @@ const screens = {
             headerShown: false  
         },
     },
-    Publicar: {
-        screen: Publicar,
+    Publicacion: {
+        screen: Publicacion,
         navigationOptions: {
             headerShown: false  
         },

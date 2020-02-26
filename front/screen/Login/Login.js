@@ -1,11 +1,58 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { View, ScrollView, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
-import InputField from "../../components/form/InputFiled";
 import colors from "../../src/style/index";
-import { Container, Header, Title, Content, Button, Icon, Left, Right, Body, Text } from "native-base";
+import { Container, Header, Title, Button, Icon, Left, Right, Body, Text, Item, Input, Form, Label } from "native-base";
+import enviarData from '../../envios/getPostLogin'
 export default class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      correo: "",
+      contra: "",
+      usuario: "",
+      idUser: null,
+      labelTextCorreo:"Correo",
+      labelTextContrasena:"Contraseña"
+    }
+    this.onLogin = this.onLogin.bind(this)
+    this.correo = this.correo.bind(this)
+    this.contra = this.contra.bind(this)
+  }
+  correo(event){
+    this.setState({correo: event.target.value})
+  }
+  contra(event){
+    this.setState({contra: event.target.value})
+  }
+  onLogin= async(x,y)=>{
+    await enviarData(x, y).then((data)=>{
+      if (data === "Datos incorrectos") {
+        alert("datos incorrectos")
+      }else{
+      console.log(data)
+      this.setState({
+          usuario: data[0]['nombre'],
+          idUser: data[0]['id']
+      })
+      }
+    })
+    /*localStorage.setItem('id', this.state.idUser)
+    localStorage.setItem('user', String(this.state.usuario))*/
+    console.log('Aplaste el login')
+    return this.props.navigation.push('Home')
+  }
+  onInicio(){
+    console.log('Aplaste atras')
+    return this.props.navigation.push('Inicio')
+  }
   render() {
+    const { labelTextSize, labelColor, textColor, borderBottomColor} = this.props;
+    const color = labelColor || colors.white;
+    const fontSize = labelTextSize || 14;
+    const inputColor = textColor || colors.white  ;
+    const borderBottom = borderBottomColor || "transparent";
+    let secureInput = this.secureInput;
     return (
       <Container>
         <ImageBackground style={styles.wrapper} source={require('../../img/fondo2.jpg')} behavior="padding">
@@ -16,7 +63,7 @@ export default class Login extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Transparent</Title>
+            <Title>Login</Title>
           </Body>
           <Right>
             <Button transparent onPress={this.onInicio.bind(this)}>
@@ -27,27 +74,48 @@ export default class Login extends Component {
       
         <View style={styles.scrollViewWrapper, styles.avoidView}>
           <ScrollView style={styles.scrollView}>
-            <InputField 
-              labelText="Correo Institucional" 
-              labelTextSize={14} 
-              labelColor={colors.white} 
-              textColor={colors.white} 
-              borderBottomColor={colors.white} 
-              inputType="email"  
-              customStyle={{marginBottom:30}}
-            />
-            <InputField 
-              labelText="Contraseña" 
-              labelTextSize={14} 
-              labelColor={colors.white} 
-              textColor={colors.white} 
-              borderBottomColor={colors.white} 
-              inputType="password"  
-              customStyle={{marginBottom:30}}
-            />
+            <Form>
+              <Item stackedLabel last>
+                <Label style={[{ color, fontSize }, styles.label]}>{this.state.labelTextCorreo}</Label>
+                <Input   
+                  autoCorrect={false}
+                  style={[
+                    { color: inputColor, borderBottomColor: borderBottom },
+                    styles.inputFiled
+                  ]}
+                  secureTextEntry={secureInput}
+                  labelTextSize={14} 
+                  labelColor={colors.white} 
+                  textColor={colors.white} 
+                  borderBottomColor={colors.white} 
+                  inputType="email"  
+                  customStyle={{marginBottom:30}}
+                  onChangeText={(correo) =>   this.setState({correo})}
+                />
+              </Item>
+              <Item stackedLabel last>
+                <Label style={[{ color, fontSize }, styles.label]}>{this.state.labelTextContrasena}</Label>
+                <Input   
+                  autoCorrect={false}
+                  style={[
+                    { color: inputColor, borderBottomColor: borderBottom },
+                    styles.inputFiled
+                  ]}
+                  secureTextEntry={secureInput}
+                  labelTextSize={14} 
+                  labelColor={colors.white} 
+                  textColor={colors.white} 
+                  borderBottomColor={colors.white} 
+                  inputType="password"  
+                  customStyle={{marginBottom:30}}
+                  onChangeText={(contra) =>   this.setState({contra})}
+                />
+              </Item>
+            </Form>
+            
           </ScrollView>
           <View style={styles.buttonWrapper}>
-            <TouchableHighlight onPress={(this.onLogin.bind(this))} style={[{ opacity: 0.6 }, styles.button]}>
+            <TouchableHighlight onPress={()=>this.onLogin(this.state.correo, this.state.contra)} style={[{ opacity: 0.6 }, styles.button]}>
               <Text >Iniciar Sesion</Text>
             </TouchableHighlight>
           </View>
@@ -55,14 +123,6 @@ export default class Login extends Component {
        </ImageBackground>
        </Container>
     );
-  }
-  onLogin(){
-    console.log('Aplaste el login')
-    return this.props.navigation.push('Home')
-  }
-  onInicio(){
-    console.log('Aplaste atras')
-    return this.props.navigation.push('Inicio')
   }
 }
 
